@@ -43,7 +43,8 @@ jobs:
           paths: '["Biblioteca-Trabalho-Individual-2022-1/Trabalho-Individual-2022-1-main/library_front/**"]'
 
       - name: Install dependencies
-        run: npm install
+        # run: npm install
+        run: cd Biblioteca-Trabalho-Individual-2022-1/Trabalho-Individual-2022-1-main/library_front && npm install
 
       - name: Run test
         run: npm test
