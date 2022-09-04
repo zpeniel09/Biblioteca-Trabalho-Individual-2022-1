@@ -40,17 +40,19 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 16
-          paths: '["Biblioteca-Trabalho-Individual-2022-1/Trabalho-Individual-2022-1-main/library_front/**"]'
+          paths: '["Trabalho-Individual-2022-1-main/library_front/**"]'
 
       - name: Install dependencies
         # run: npm install
-        run: cd Biblioteca-Trabalho-Individual-2022-1/Trabalho-Individual-2022-1-main/library_front && npm install
+        run: cd Trabalho-Individual-2022-1-main/library_front && npm install
 
       - name: Run test
-        run: npm test
+        # run: npm test
+        run: cd Trabalho-Individual-2022-1-main/library_front && npm test
 
       - name: library front Lint
-        run: docker-compose run library_front bash -c "npm && npm lint"
+        # run: docker-compose run library_front bash -c "npm && npm lint"
+        run: cd Trabalho-Individual-2022-1-main/library_front && npm run lint
 
       - name: Checkout  
         uses: actions/checkout@v3  
