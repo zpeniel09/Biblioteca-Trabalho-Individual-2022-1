@@ -1,0 +1,62 @@
+version: "3.7"
+
+services:
+  db:
+    container_name: db
+    restart: always
+    build:
+      context: ./library_back/dataBasePostgresql
+      dockerfile: Dockerfile
+    ports:
+      - "5432:5432"
+    env_file:
+      - .env
+    volumes:
+      - ./data/db:/var/lib/dataBasePostgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -h db -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  nginx:
+    depends_on:
+      - library_back
+      - library_front
+    restart: always
+    build:
+      dockerfile: Dockerfile
+      context: ./nginx
+    ports:
+      - "3050:80"
+
+  library_back:
+    container_name: library_back
+    build:
+      context: ./library_back/
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    env_file:
+      - .env
+    volumes:
+      - ./library_back:/library_back
+    depends_on:
+      - db
+    links:
+      - db:db
+
+  library_front:
+    stdin_open: true
+    container_name: library_front
+    build: 
+      context: ./library_front/
+      dockerfile: Dockerfile
+    command: npm start
+    volumes:
+      - ./library_front:/library_front
+      - /library_front/node_modules
+    ports:
+      - "3000:3000"
+    depends_on:
+      - library_back
