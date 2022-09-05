@@ -76,10 +76,15 @@ jobs:
           cache: 'pip'  
       - name: Install dependencies  
         if: ${{ steps.filter.outputs.py_modified == 'true' }}  
-        run: pip install -r requirements.txt  
+        # run: pip install -r requirements.txt  
+        run: cd Trabalho-Individual-2022-1-main/library_back && pip install -requirements.txt
       - name: Run flake8  
         if: ${{ steps.filter.outputs.py_modified == 'true' }}  
         run: flake8 ${{ steps.filter.outputs.py_modified_files }}  
       - name: Run pytest  
         if: ${{ steps.filter.outputs.py_modified == 'true' }}  
-        run: pytest tests
+        # run: pytest tests
+        run: cd Trabalho-Individual-2022-1-main/library_back && pytest tests
+      - name: library backend Lint
+        run: cd Trabalho-Individual-2022-1-main/library_back && docker-compose run library_back pylint *.py
+
