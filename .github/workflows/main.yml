@@ -62,7 +62,7 @@ jobs:
         uses: actions/checkout@v3  
         id: filter  
         with:  
-          paths: '["Biblioteca-Trabalho-Individual-2022-1/Trabalho-Individual-2022-1-main/library_back/**"]'
+          paths: '["Trabalho-Individual-2022-1-main/library_back/**"]'
           list-files: shell  
           filters: |  
             py_modified:  
