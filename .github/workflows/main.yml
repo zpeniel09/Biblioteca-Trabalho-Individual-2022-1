@@ -49,7 +49,8 @@ jobs:
       - name: Run test
         # run: npm test
         # run: cd Trabalho-Individual-2022-1-main/library_front && npm test
-        run: cd Trabalho-Individual-2022-1-main && docker-compose run library_front bash -c "npm && npm test:unit"
+        run: cd Trabalho-Individual-2022-1-main && docker-compose run library_front npm test
+        # bash -c "npm && npm test:unit"
 
       - name: library front Lint
         # run: docker-compose run library_front bash -c "npm && npm lint"
